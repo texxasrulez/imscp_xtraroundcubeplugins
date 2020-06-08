@@ -1,0 +1,15 @@
+{
+    "name": "texxasrulez/imscp_xtraroundcubeplugins",
+    "type": "imscp-plugin",
+    "description": "Plugins for i-MSCP System Roundcube Install.",
+    "homepage": "https://github.com/texxasrulez/imscp_xtraroundcubeplugins",
+    "license": "GPL-3.0-only",
+    "version": "1.0.0",
+    "authors": [
+        {
+            "name": "Gene Hawkins",
+            "email": "texxasrulez@yahoo.com",
+            "role": "Lead"
+        }
+    ],
+}
