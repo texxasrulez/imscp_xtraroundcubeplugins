@@ -207,7 +207,7 @@ maximum number of login attempts has been reached. In other words, this plugin h
 
 ### select_pagesize
 
-Plugin to choose how many emails to display per page. Additional line required to be placed in Roundcube's config.inc.php file - `$config['pagesize_options'] = [10, 15, 20, 25, 30, 40, 50];`
+Plugin to choose how many emails to display per page. Additional line required to be placed in Roundcube's config.inc.php file is automatically added `$config['pagesize_options'] = [10, 15, 20, 25, 30, 40, 50];`
 
 ### show_folder_size
 

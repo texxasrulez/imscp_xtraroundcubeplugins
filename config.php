@@ -74,7 +74,7 @@ return array(
 		
 		// Pre-installed calendars, added at first access to calendar section
 		// Caldav driver only
-		'caldav_url' => 'https://www.genesworld.net/cloud/remote.php/dav/calendars/%u/',
+		'caldav_url' => 'https://www.domain.ltd/nextcloud/remote.php/dav/calendars/%u/',
 
         // Calendar view (agendaDay, agendaWeek, month)
         'calendar_default_view' => 'month',
@@ -86,7 +86,7 @@ return array(
         'calendar_sync_period' => '600',
 
         // Calendar Crypt Key - use `pwgen -s 24` in linux terminal for a good random key
-        'calendar_crypt_key' => '7gxZDNdu7ww2I3j6PhSRppTj',
+        'calendar_crypt_key' => 'random24bytestring',
 		
         // Caldav Debug Possible values: true, false
         'calendar_caldav_debug' => false,
@@ -106,7 +106,7 @@ return array(
 		'carddav_name' => 'Cloud',
 		
 		// URL to your addressbooks
-		'carddav_url' => 'https://www.genesworld.net/cloud/remote.php/dav/addressbooks/users/%u/',
+		'carddav_url' => 'https://www.domain.ltd/nextcloud/remote.php/dav/addressbooks/users/%u/',
 
 		// optional attributes
 		'carddav_active' => true,
@@ -222,10 +222,10 @@ return array(
     'nextcloud_config' => array(	
         // Define NextCloud URL
 	    // URLs to nextCloud instance (use same url as rc to avoid cross domains problems) // Trailing Slash Needed
-        'nextcloud_url' => 'https://www.genesworld.net/cloud/',
+        'nextcloud_url' => 'https://www.domain.ltd/nextcloud//',
 
         // NextCloud Crypt Key (must match nextcloud config key)
-        'roundcube_nextcloud_des_key' => '4JS3Vadi9t+MeVzAAk3bHKXTY6Znyt'
+        'roundcube_nextcloud_des_key' => 'random24bytestring'
     ),	
 
     // odfviewer plugin (default: yes)
@@ -270,7 +270,7 @@ return array(
 	// Quota Configuration Parameters
     'quota_config' => array(
 		// Webmaster Email
-		'quota_config' => '<a href="mailto:webmaster@genesworld.net">Genesworld.net Webmaster</a>',
+		'quota_config' => '<a href="mailto:webmaster@domain.ltd">Email Webmaster</a>',
 		// Show Webmaster Email
 		'show_admin_contact' => true
 	),
