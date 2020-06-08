@@ -37,9 +37,10 @@ Should install with no issues and execute the following commands for security
 
 `rm -r /var/www/imscp/gui/public/tools/webmail/public_html`  
 
-You should now download and install within Plugin Management in i-MSCP GUI, my i-MSCP Plugin for Roundcube https://github.com/texxasrulez/imscp_xtraroundcubeplugins/archive/1.4.6.tar.gz  
-This will make your job easier as to automatically add plugins to main confin as well as inject proper schemas into database.  
-You will only need to upload the tar.gz file included in download.  
+To make it even easier on you, download https://github.com/texxasrulez/imscp_xtraroundcubeplugins/archive/1.4.6.tar.gz  
+
+This repo will automatically add plugins to main config as well as inject proper schemas into database.  
+You will only need to upload the `XtraRoundcubePlugins.tar.gz` file included in download to i-MSCP's Plugin Manager Page.  
 
 ## Requirements
 
