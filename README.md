@@ -1,11 +1,51 @@
-# i-MSCP RoundcubePlugins plugin v1.0.0 Forked by texxasrulez
+# i-MSCP XtraRoundcubePlugins plugin v1.0.0
 
-Provides many plugins for the Roundcube Webmail.
+**Forked by texxasrulez**  
+
+I have been playing with i-MSCP long enough now that I know just enough to be dangerous and have forked the RoundcubePlugin the developers give away and updated for use with Roundcube version 1.4.x. I have added several popular plugins and enabled many stock plugins for a more enhanced Roundcube experience. I have tried to make as many customizable configurations as possible and will add more in the future as I knit pick this.  
+This repo does have several of my own plugins added as well as many that I personally like.  
+Many users wanted a caldav capable calendar plugin, now there is one. You will need to have a caldav server already setup and know your URL structure to add that to your main config.php file to sync with your calendar server.  
+I will have more detailed instructions soon. Here is what I have so far ...
+
+***Roundcube 1.4.x and higher REQUIRED to work***
+
+### Get Roundcube 1.4.x with extra skins  
+
+Download my repo if you want additional skins/themes included, if not, get official Roundcube download here https://roundcube.net/download using the URL with the wget command below for seamless install/upgrade.  
+
+Move to your working directory  
+
+`cd /usr/local/src/`  
+
+Download mine or official
+
+`wget https://github.com/texxasrulez/roundcube_xtra/archive/1.4.6.tar.gz'  
+
+Extract Files  
+
+`tar -xzf 1.4.6.tar.gz`  
+
+Install Roundcube to i-MSCP system
+
+`cd /usr/local/src/roundcube_xtra-1.4.6/bin'  
+
+`./installto.sh /var/www/imscp/gui/public/tools/webmail/`  
+
+Should install with no issues and execute the following commands for security  
+
+`rm -r /var/www/imscp/gui/public/tools/webmail/installer'  
+
+`rm -r /var/www/imscp/gui/public/tools/webmail/public_html`  
+
+You should now download and install within Plugin Management in i-MSCP GUI, my i-MSCP Plugin for Roundcube https://github.com/texxasrulez/imscp_xtraroundcubeplugins/archive/1.4.6.tar.gz  
+This will make your job easier as to automatically add plugins to main confin as well as inject proper schemas into database.  
+You will only need to upload the tar.gz file included in download.  
 
 ## Requirements
 
 - i-MSCP 1.3.x Serie (version >= 1.3.1), 1.4.x, 1.5.x Serie
 - Dovecot (Only needed if you want use the managesieve Roundcube plugin)
+- GNUPGP & open_basedir skills (Only if you need to use the enigma Roundcube plugin)
 - Roundcube >= 1.4
 
 ### Debian / Ubuntu packages
@@ -44,7 +84,7 @@ Note that plugin update can take up several minutes.
 
 ## Plugin configuration
 
-See [Configuration file](../RoundcubePlugins/config.php)
+See [Configuration file](../XtraRoundcubePlugins/config.php)
 
 When changing a configuration parameter in the plugin configuration file, do not forget to trigger plugin change by
 triggering a plugin list update from the plugin management interface.
