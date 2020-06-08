@@ -1,0 +1,14 @@
+{
+  "name": "fail2ban",
+  "description": "displays failed login attempts in your syslog or userlogins log file",
+  "keywords": ["fail2ban", "security"],
+  "homepage": "http://gh.mattrude.com/rc-plugin-fail2ban/",
+  "license": "GPL-3.0",
+  "type": "roundcube-plugin",
+  "version": "1.2",
+  "extra": {
+    "roundcube": {
+      "min-version": "0.3"
+    }
+  }
+}

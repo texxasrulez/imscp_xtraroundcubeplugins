@@ -1,0 +1,12 @@
+{
+  "name": "tbsmcd/select_pagesize",
+  "type": "roundcube-plugin",
+  "license": "MIT",
+  "version": "1.0.0",
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://plugins.roundcube.net"
+    }
+  ],
+}

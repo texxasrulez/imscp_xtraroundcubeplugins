@@ -1,0 +1,14 @@
+{
+    "name": "germancoding/tls_icon",
+    "type": "roundcube-plugin",
+    "description": "Displays a lock next to the message if it was received using TLS. Requires TLS logging enabled in the MTA.",
+    "license": "MIT",
+    "keywords": ["TLS", "SSL", "icon", "logging"],
+    "homepage": "https://github.com/GermanCoding/Roundcube_TLS_Icon",
+	"repositories": [
+        {
+            "type": "composer",
+            "url": "https://plugins.roundcube.net"
+        }
+    ],
+}

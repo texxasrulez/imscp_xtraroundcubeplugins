@@ -1,0 +1,21 @@
+{
+    "name": "texxasrulez/nextcloud",
+    "type": "roundcube-plugin",
+    "description": "Embed nextCloud inside your Roundcube with user authentication",
+    "homepage": "https://github.com/texxasrulez/roundcube-plugin-nextcloud",
+    "license": "GPL-3.0-only",
+    "version": "0.3",
+    "authors": [
+        {
+            "name": "Gene Hawkins",
+            "email": "texxasrulez@yahoo.com",
+            "role": "Lead"
+        }
+    ],
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://plugins.roundcube.net"
+        }
+    ],
+}

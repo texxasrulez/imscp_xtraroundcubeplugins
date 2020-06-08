@@ -1,0 +1,21 @@
+{
+    "name": "texxasrulez/vcard_attach",
+    "type": "roundcube-plugin",
+    "description": "Add your vCard as an attachment to your outgoing emails.",
+    "homepage": "https://github.com/texxasrulez/vcard_attach",
+    "license": "GPL-3.0-only",
+    "version": "0.1",
+    "authors": [
+        {
+            "name": "Gene Hawkins",
+            "email": "texxasrulez@yahoo.com",
+            "role": "Lead"
+        }
+    ],
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://plugins.roundcube.net"
+        }
+    ],
+}

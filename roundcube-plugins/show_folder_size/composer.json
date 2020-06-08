@@ -1,0 +1,14 @@
+{
+    "name": "jfcherng-roundcube/show-folder-size",
+    "description": "A Roundcube plugin which shows folder size.",
+    "type": "roundcube-plugin",
+    "license": "MIT",
+    "homepage": "https://github.com/jfcherng-roundcube/plugin-show-folder-size",
+    "version": "0.7.2",
+    "authors": [
+        {
+            "name": "Jack Cherng",
+            "email": "jfcherng@gmail.com"
+        }
+    ],
+}

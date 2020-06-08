@@ -1,0 +1,21 @@
+{
+    "name": "texxasrulez/account_details",
+    "type": "roundcube-plugin",
+    "description": "Display additional information for the current user and much more.",
+    "homepage": "https://github.com/texxasrulez/Account-Details-for-Roundcube",
+    "license": "GPL-3.0-only",
+    "version": "3.3",
+    "authors": [
+        {
+            "name": "Gene Hawkins",
+            "email": "texxasrulez@yahoo.com",
+            "role": "Lead"
+        }
+    ],
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://plugins.roundcube.net"
+        }
+    ],
+}

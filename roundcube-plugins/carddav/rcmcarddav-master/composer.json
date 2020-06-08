@@ -1,0 +1,28 @@
+{
+    "name": "roundcube/carddav",
+    "type": "roundcube-plugin",
+    "description": "CardDAV adapter for connecting to CardDAV-enabled addressbooks",
+    "keywords": ["addressbook","carddav","contacts","owncloud","davical"],
+    "homepage": "https://www.benjamin-schieder.de/carddav.html",
+    "license": "GPL-2.0",
+    "version": "3.0.3",
+    "authors": [
+        {
+            "name": "Benjamin Schieder",
+            "email": "carddav@wegwerf.anderdonau.de",
+            "homepage": "https://www.benjamin.schieder.de/",
+            "role": "Developer"
+        },
+        {
+            "name": "Michael Stilkerich",
+            "email": "michael@stilkerich.eu",
+            "role": "Developer"
+        }
+    ],
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "git://github.com/blind-coder/rcmcarddav.git"
+        }
+    ],
+}
