@@ -280,10 +280,32 @@ sub _setXtraRoundcubePlugin
     if ( $action eq 'enable' ) {
         my @plugins = ();
 
-        for ( qw/ account_details additional_imap additional_smtp advanced_search contextmenu contextmenu_folder easy_unsubscribe fail2ban keyboard_shortcuts message_highlight odfviewer pdfviewer select_pagesize show_folder_size tls_icon vcard_attach /
+        for ( qw/ acl account_details additional_imap additional_smtp advanced_search contextmenu contextmenu_folder easy_unsubscribe fail2ban keyboard_shortcuts message_highlight odfviewer pdfviewer persistent_login select_pagesize show_folder_size tls_icon vcard_attach vcard_attachments /
         ) {
             next unless lc( $self->{'config'}->{$_ . '_plugin'} ) eq 'yes';
             push @plugins, $_;
+        }
+
+        if ( lc( $self->{'config'}->{'acl_plugin'} ) eq 'yes' ) {
+            push @plugins, 'acl';
+            if ( $main::imscpConfig{'PO_SERVER'} eq 'dovecot' ) {
+                my $rs = $self->_modifyDovecotConfig( 'acl', 'add' );
+                return $rs if $rs;
+            }
+        } elsif ( $main::imscpConfig{'PO_SERVER'} eq 'dovecot' ) {
+            my $rs = $self->_modifyDovecotConfig( 'acl', 'remove' );
+            return $rs if $rs;
+        }
+
+        if ( lc( $self->{'config'}->{'additional_message_headers_plugin'} ) eq 'yes' ) {
+            push @plugins, 'additional_message_headers';
+            if ( $main::imscpConfig{'PO_SERVER'} eq 'dovecot' ) {
+                my $rs = $self->_modifyDovecotConfig( 'additional_message_headers', 'add' );
+                return $rs if $rs;
+            }
+        } elsif ( $main::imscpConfig{'PO_SERVER'} eq 'dovecot' ) {
+            my $rs = $self->_modifyDovecotConfig( 'additional_message_headers', 'remove' );
+            return $rs if $rs;
         }
 
         if ( lc( $self->{'config'}->{'archive_plugin'} ) eq 'yes' ) {
@@ -415,6 +437,28 @@ sub _setXtraRoundcubePlugin
             return $rs if $rs;
         } elsif ( $main::imscpConfig{'PO_SERVER'} eq 'dovecot' ) {
             my $rs = $self->_modifyDovecotConfig( 'managesieve', 'remove' );
+            return $rs if $rs;
+        }
+
+        if ( lc( $self->{'config'}->{'new_user_dialog_plugin'} ) eq 'yes' ) {
+            push @plugins, 'new_user_dialog';
+            if ( $main::imscpConfig{'PO_SERVER'} eq 'dovecot' ) {
+                my $rs = $self->_modifyDovecotConfig( 'new_user_dialog', 'add' );
+                return $rs if $rs;
+            }
+        } elsif ( $main::imscpConfig{'PO_SERVER'} eq 'dovecot' ) {
+            my $rs = $self->_modifyDovecotConfig( 'new_user_dialog', 'remove' );
+            return $rs if $rs;
+        }
+
+        if ( lc( $self->{'config'}->{'password_plugin'} ) eq 'yes' ) {
+            push @plugins, 'password';
+            if ( $main::imscpConfig{'PO_SERVER'} eq 'dovecot' ) {
+                my $rs = $self->_modifyDovecotConfig( 'password', 'add' );
+                return $rs if $rs;
+            }
+        } elsif ( $main::imscpConfig{'PO_SERVER'} eq 'dovecot' ) {
+            my $rs = $self->_modifyDovecotConfig( 'password', 'remove' );
             return $rs if $rs;
         }
 

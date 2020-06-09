@@ -34,14 +34,14 @@ return array(
     'account_details_plugin' => 'yes',
 	
     // adds multiple IMAP Accounts to Roundcube Possible values: yes, no
-    'additional_imap_plugin' => 'yes',
+    'additional_imap_plugin' => 'no',
 	
     // adds originating IP address for the emails sent via Roundcube (Default: yes)
     // Possible values: yes, no
     'additional_message_headers_plugin' => 'yes',
 	
     // adds multiple SMTP Accounts to Roundcube Possible values: yes, no
-    'additional_smtp_plugin' => 'yes',
+    'additional_smtp_plugin' => 'no',
 	
     // adds advanced search for Roundcube (Default: yes)
     // Possible values: yes, no
@@ -62,7 +62,7 @@ return array(
 
     // calendar plugin (default: yes)
     // Possible values: yes, no
-    'calendar_plugin' => 'yes',
+    'calendar_plugin' => 'no',
 
     // Calendar Configuration Parameters
     'calendar_config' => array(	
@@ -97,7 +97,7 @@ return array(
 
     // carddav plugin (default: yes)
     // Possible values: yes, no
-    'carddav_plugin' => 'yes',
+    'carddav_plugin' => 'no',
 
     // carddav configuration parameters
     'carddav_config' => array(
@@ -156,11 +156,11 @@ return array(
 
     // fail2ban plugin (default: yes)
     // Possible values: yes, no
-    'fail2ban_plugin' => 'yes',
+    'fail2ban_plugin' => 'no',
 
     // folder info plugin (default: yes)
     // Possible values: yes, no
-    'folder_info_plugin' => 'yes',
+    'folder_info_plugin' => 'no',
 
     // keyboard_shortcuts plugin (default: yes)
     // Possible values: yes, no
@@ -168,7 +168,7 @@ return array(
 
     // managesieve plugin (default: no)
     // Possible values: yes, no
-    'managesieve_plugin' => 'yes',
+    'managesieve_plugin' => 'no',
 
     // Configuration parameters for the managesieve plugin
     'managesieve_config' => array(
@@ -216,13 +216,13 @@ return array(
     ),
 
     // NextCloud embed within Roundcube plugin (default: yes)
-    'nextcloud_plugin' => 'yes',
+    'nextcloud_plugin' => 'no',
 	
 	// Configuration parameters for Nextcloud RC Embed
     'nextcloud_config' => array(	
         // Define NextCloud URL
 	    // URLs to nextCloud instance (use same url as rc to avoid cross domains problems) // Trailing Slash Needed
-        'nextcloud_url' => 'https://www.domain.ltd/nextcloud//',
+        'nextcloud_url' => 'https://www.domain.ltd/nextcloud/',
 
         // NextCloud Crypt Key (must match nextcloud config key)
         'roundcube_nextcloud_des_key' => 'random24bytestring'
@@ -261,7 +261,7 @@ return array(
 
     // persistent_login (default: yes)
     // Possible values: yes, no
-    'persistent_login_plugin' => 'yes',
+    'persistent_login_plugin' => 'no',
 
     // quota plugin (default: yes)
     // Possible values: yes, no

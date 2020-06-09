@@ -233,6 +233,45 @@ Detect VCard attachments and show a button to add them to address book
 
 This plugin adds an option to download all attachments of a message in one zip file.
 
+**Enabled/Disabled by Default**  
+
+I have all the plugins that has prerequisites required before you can install and use  
+
+~~~  
+    'acl_plugin' => 'yes',
+    'account_details_plugin' => 'yes',
+    'additional_imap_plugin' => 'no',
+    'additional_message_headers_plugin' => 'yes',
+    'additional_smtp_plugin' => 'no',
+    'advanced_search_plugin' => 'yes',
+    'archive_plugin' => 'yes',
+    'authres_status_plugin' => 'yes',
+    'calendar_plugin' => 'no',
+    'carddav_plugin' => 'no',
+    'contextmenu_plugin' => 'yes',
+    'contextmenu_folder_plugin' => 'yes',
+    'easy_unsubscribe_plugin' => 'yes',
+    'emoticons_plugin' => 'yes',
+    'enigma_plugin' => 'no',
+    'fail2ban_plugin' => 'no',
+    'folder_info_plugin' => 'no',
+    'message_highlight_plugin' => 'yes',
+    'new_user_dialog_plugin' => 'yes',
+    'nextcloud' => 'no',
+    'odfviewer_plugin' => 'yes',
+    'password_plugin' => 'yes',
+    'pdfviewer_plugin' => 'yes',
+    'persistent_login_plugin' => 'no',
+    'quota' => 'no',
+    'rcguard_plugin' => 'no',
+    'select_pagesize_plugin' => 'yes',
+    'show_folder_size_plugin' => 'yes',
+    'tls_icon_plugin' => 'yes',
+    'vcard_attach_plugin' => 'yes',
+    'vcard_attachments_plugin' => 'yes',
+    'zipdownload_plugin' => 'yes'
+~~~  
+
 ## License
 
 ```
