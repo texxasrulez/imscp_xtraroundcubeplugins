@@ -86,6 +86,13 @@ sub update
 {
     my ( $self, $fromVersion ) = @_;
 
+    if ( version->parse( $fromVersion ) < version->parse( '2.0.0' ) ) {
+        # Remove pop3fetcher plugin which is no longer provided
+        my $rs = iMSCP::Dir->new( dirname => "$main::imscpConfig{'GUI_PUBLIC_DIR'}/tools/webmail/plugins/pop3fetcher" )->remove();
+        $rs ||= Servers::cron->factory()->deleteTask( { TASKID => 'Plugin::XtraRoundcubePlugins::pop3fetcher' } );
+        return $rs if $rs;
+    }
+
     $self->install();
 }
 
@@ -209,6 +216,7 @@ sub _installPlugins
     debug( $stdout ) if $stdout;
     error( $stderr ) if $stderr && $rs;
 
+    $rs ||= $self->_installComposerPackages();
     return $rs if $rs;
 
     my $panelUName = $main::imscpConfig{'SYSTEM_USER_PREFIX'} . $main::imscpConfig{'SYSTEM_USER_MIN_UID'};
@@ -280,21 +288,10 @@ sub _setXtraRoundcubePlugin
     if ( $action eq 'enable' ) {
         my @plugins = ();
 
-        for ( qw/ acl account_details additional_imap additional_smtp advanced_search contextmenu contextmenu_folder easy_unsubscribe fail2ban keyboard_shortcuts message_highlight odfviewer pdfviewer persistent_login select_pagesize show_folder_size tls_icon vcard_attach vcard_attachments /
+        for ( qw/ acl account_details additional_imap additional_smtp advanced_search contextmenu contextmenu_folder easy_unsubscribe fail2ban help keyboard_shortcuts message_highlight odfviewer pdfviewer persistent_login select_pagesize show_folder_size tls_icon vcard_attach vcard_attachments /
         ) {
             next unless lc( $self->{'config'}->{$_ . '_plugin'} ) eq 'yes';
             push @plugins, $_;
-        }
-
-        if ( lc( $self->{'config'}->{'acl_plugin'} ) eq 'yes' ) {
-            push @plugins, 'acl';
-            if ( $main::imscpConfig{'PO_SERVER'} eq 'dovecot' ) {
-                my $rs = $self->_modifyDovecotConfig( 'acl', 'add' );
-                return $rs if $rs;
-            }
-        } elsif ( $main::imscpConfig{'PO_SERVER'} eq 'dovecot' ) {
-            my $rs = $self->_modifyDovecotConfig( 'acl', 'remove' );
-            return $rs if $rs;
         }
 
         if ( lc( $self->{'config'}->{'additional_message_headers_plugin'} ) eq 'yes' ) {
@@ -382,6 +379,17 @@ sub _setXtraRoundcubePlugin
             }
         } elsif ( $main::imscpConfig{'PO_SERVER'} eq 'dovecot' ) {
             my $rs = $self->_modifyDovecotConfig( 'folder_info', 'remove' );
+            return $rs if $rs;
+        }
+
+        if ( lc( $self->{'config'}->{'help_plugin'} ) eq 'yes' ) {
+            push @plugins, 'help';
+            if ( $main::imscpConfig{'PO_SERVER'} eq 'dovecot' ) {
+                my $rs = $self->_modifyDovecotConfig( 'help', 'add' );
+                return $rs if $rs;
+            }
+        } elsif ( $main::imscpConfig{'PO_SERVER'} eq 'dovecot' ) {
+            my $rs = $self->_modifyDovecotConfig( 'help', 'remove' );
             return $rs if $rs;
         }
 
@@ -528,6 +536,10 @@ sub _configurePlugin
     } elsif ( $pluginName eq 'enigma' ) {
         $data = {
             enigma_pgp_homedir => $self->{'config'}->{'enigma_config'}->{'enigma_pgp_homedir'}
+        };
+    } elsif ( $pluginName eq 'help' ) {
+        $data = {
+            help_source => $self->{'config'}->{'help_config'}->{'help_source'}
         };
     } elsif ( $pluginName eq 'managesieve' ) {
         $data = {
@@ -753,12 +765,75 @@ sub _checkRequirements
 
     my $version = $self->{'ROUNDCUBE'}->{'ROUNDCUBE_VERSION'};
 
-    if ( version->parse( $version ) < version->parse( '1.2.0' ) ) {
+    if ( version->parse( $version ) < version->parse( '1.4.6' ) ) {
         error( sprintf( 'Your Roundcube version (%s) is not compatible with this plugin.', $version ));
         return 1;
     }
 
     0;
+}
+
+=item _installComposerPackages( )
+
+ Install required composer package for calendaring library
+
+ Return int 0 on success, other on failure
+
+=cut
+
+sub _installComposerPackages
+{
+    my $webmailDir = "$main::imscpConfig{'GUI_PUBLIC_DIR'}/tools/webmail";
+
+    return 0 unless -f "$webmailDir/composer.json" || -f "$webmailDir/composer.json-dist";
+
+    if ( -f "$webmailDir/composer.json-dist" ) {
+        my $rs = iMSCP::File->new( filename => "$webmailDir/composer.json-dist" )->moveFile( "$webmailDir/composer.json" );
+        return $rs if $rs;
+    }
+
+    my $panelUName = $main::imscpConfig{'SYSTEM_USER_PREFIX'} . $main::imscpConfig{'SYSTEM_USER_MIN_UID'};
+    my $panelGName = $panelUName;
+
+    # Make sure that Web user can write into base directory
+    my $rs = setRights( $webmailDir, { user => $panelUName, group => $panelGName, mode => '0750' } );
+    return $rs if $rs;
+
+    # Make sure that composer.json and composer.lock (if any) files are writable and owned by expected Web user
+    for ( 'composer.json', 'composer.lock' ) {
+        next unless -f "$webmailDir/$_";
+        $rs = setRights( "$webmailDir/$_", { user => $panelUName, group => $panelGName, mode => '0600' } );
+        return $rs if $rs;
+    };
+
+    # Make sure that composer vendor directory is writable and owned by expected Web user
+    $rs = setRights( "$webmailDir/vendor", { user => $panelUName, group => $panelGName, dirmode => '0700', filemode => '0600', recursive => 1 } );
+    return $rs if $rs;
+
+    unless ( -f "/var/local/imscp/composer.phar" ) {
+        error( "Couldn't find composer.phar file in /var/local/imscp/ directory" );
+        return 1;
+    }
+
+    my $imscpWebUser = $main::imscpConfig{'SYSTEM_USER_PREFIX'} . $main::imscpConfig{'SYSTEM_USER_MIN_UID'};
+    $rs = execute(
+        sprintf( "su -l $imscpWebUser -s /bin/sh -c %s", escapeShell(
+            "COMPOSER_HOME=$main::imscpConfig{'GUI_ROOT_DIR'}/data/persistent/.composer " # Override composer homedir
+                . 'COMPOSER_PROCESS_TIMEOUT=2000 '                                        # Increase composer process timeout for slow connections
+                . 'COMPOSER_NO_INTERACTION=1 '                                            # not user interaction
+                . 'COMPOSER_DISCARD_CHANGES=true '                                        # discard any change made in vendor
+                . "php -d date.timezone=$main::imscpConfig{'TIMEZONE'} -d allow_url_fopen=1 "
+                . '-d suhosin.executor.include.whitelist=phar '
+                . "/var/local/imscp/composer.phar require  --no-ansi --no-interaction --working-dir=$webmailDir --update-no-dev "
+                . '--ignore-platform-reqs --prefer-stable --no-suggest sabre/vobject ~3.3.3'
+        )),
+        \my $stdout,
+        \my $stderr
+    );
+    debug( $stdout ) if $stdout;
+    debug( $stderr ) unless $rs || !$stderr;
+    error( $stderr || 'Unknown error' ) if $rs;
+    $rs;
 }
 
 =back

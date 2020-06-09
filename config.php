@@ -162,6 +162,18 @@ return array(
     // Possible values: yes, no
     'folder_info_plugin' => 'no',
 
+    // help plugin (default: yes)
+    // Possible values: yes, no
+    'help_plugin' => 'no',
+	
+	// Configuration parameters for the help plugin
+	'help_config' => array(
+		// Help content iframe source
+		// %l will be replaced by the language code resolved using the 'help_language_map' option
+		// If you are serving roundcube via https, then change this URL to https also.
+		$config['help_source'] = 'https://docs.roundcube.net/doc/help/1.1/%l/'
+	),
+
     // keyboard_shortcuts plugin (default: yes)
     // Possible values: yes, no
     'keyboard_shortcuts_plugin' => 'yes',

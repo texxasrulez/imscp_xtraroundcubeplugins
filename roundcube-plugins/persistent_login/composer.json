@@ -26,5 +26,9 @@
 			"homepage": "https://mfreiholz.de",
 			"role": "Developer"
 		}
-	]
+	],
+    "require": {
+        "php": ">=5.3.0",
+        "roundcube/plugin-installer": ">=0.1.3"
+    }
 }

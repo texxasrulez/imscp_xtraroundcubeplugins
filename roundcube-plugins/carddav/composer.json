@@ -25,4 +25,8 @@
             "url": "git://github.com/blind-coder/rcmcarddav.git"
         }
     ],
+    "require": {
+        "php": ">=7.1.0",
+        "roundcube/plugin-installer": ">=0.1.3"
+    }
 }

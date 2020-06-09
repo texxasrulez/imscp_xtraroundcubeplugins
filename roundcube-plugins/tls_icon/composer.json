@@ -3,6 +3,7 @@
     "type": "roundcube-plugin",
     "description": "Displays a lock next to the message if it was received using TLS. Requires TLS logging enabled in the MTA.",
     "license": "MIT",
+	"version": "1.0.3",
     "keywords": ["TLS", "SSL", "icon", "logging"],
     "homepage": "https://github.com/GermanCoding/Roundcube_TLS_Icon",
 	"repositories": [
@@ -11,4 +12,8 @@
             "url": "https://plugins.roundcube.net"
         }
     ],
+    "require": {
+        "php": ">=5.3.0",
+        "roundcube/plugin-installer": ">=0.1.3"
+    }
 }
