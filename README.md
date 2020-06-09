@@ -40,7 +40,7 @@ Should install with no issues and execute the following commands for security
 To make it even easier on you, download https://github.com/texxasrulez/imscp_xtraroundcubeplugins/archive/1.4.6.tar.gz  
 
 This repo will automatically add plugins to main config as well as inject proper schemas into database.  
-You will only need to upload the `XtraRoundcubePlugins.tar.gz` file included in download to i-MSCP's Plugin Manager Page.  
+You will only need to upload the `/tarball_installer/XtraRoundcubePlugins.tar.gz` file to i-MSCP's Plugin Manager Page.  
 
 ## Requirements
 
