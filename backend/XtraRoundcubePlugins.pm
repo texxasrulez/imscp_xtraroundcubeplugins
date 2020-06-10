@@ -288,7 +288,7 @@ sub _setXtraRoundcubePlugin
     if ( $action eq 'enable' ) {
         my @plugins = ();
 
-        for ( qw/ acl account_details additional_imap additional_smtp advanced_search contextmenu contextmenu_folder easy_unsubscribe fail2ban help keyboard_shortcuts message_highlight odfviewer pdfviewer persistent_login select_pagesize show_folder_size tls_icon vcard_attach vcard_attachments /
+        for ( qw/ acl account_details additional_imap additional_smtp advanced_search contextmenu contextmenu_folder easy_unsubscribe fail2ban help message_highlight odfviewer pdfviewer select_pagesize show_folder_size tls_icon vcard_attach vcard_attachments /
         ) {
             next unless lc( $self->{'config'}->{$_ . '_plugin'} ) eq 'yes';
             push @plugins, $_;
@@ -473,7 +473,7 @@ sub _setXtraRoundcubePlugin
         my $roundcubePluginConfig = "\n# Begin Plugin::XtraRoundcubePlugins\n";
         $roundcubePluginConfig .= '$config[\'plugins\'] = array_merge($config[\'plugins\'], array(' .
             "\n\t" . ( join ', ', map { qq/'$_'/ } @plugins ) . "\n));\n";
-        $roundcubePluginConfig .= '$config[\'pagesize_options\'] = [10, 15, 20, 25, 30, 40, 50];' . "\n \n";
+        $roundcubePluginConfig .= "\n \n" . '$config[\'pagesize_options\'] = [10, 15, 20, 25, 30, 40, 50];' . "\n \n";
         $roundcubePluginConfig .= "# Ending Plugin::XtraRoundcubePlugins\n";
         $fileContent .= $roundcubePluginConfig;
     } elsif ( $action eq 'disable' && $main::imscpConfig{'PO_SERVER'} eq 'dovecot' ) {

@@ -17,17 +17,17 @@ Move to your working directory
 
 `cd /usr/local/src/`  
 
-Download mine or official
+Download mine or official (link above)  
 
-`wget https://github.com/texxasrulez/roundcube_xtra/archive/1.4.6.tar.gz'  
+`wget https://github.com/texxasrulez/roundcube_xtra/archive/1.4.6.1.tar.gz'  
 
 Extract Files  
 
-`tar -xzf 1.4.6.tar.gz`  
+`tar -xzf 1.4.6.1.tar.gz`  
 
 Install Roundcube to i-MSCP system
 
-`cd /usr/local/src/roundcube_xtra-1.4.6/bin'  
+`cd /usr/local/src/roundcube_xtra-1.4.6.1/bin'  
 
 `./installto.sh /var/www/imscp/gui/public/tools/webmail/`  
 
@@ -41,12 +41,15 @@ To make it even easier on you, download https://github.com/texxasrulez/imscp_xtr
 
 This repo will automatically add plugins to main config as well as inject proper schemas into database.  
 You will only need to upload the `/tarball_installer/XtraRoundcubePlugins.tar.gz` file to i-MSCP's Plugin Manager Page.  
+**Be Advised**  
+If you reconfigure i-MSCP, it will revert back to original Roundcube v 1.2 and you will need to do this all over again. Good thing it is easy as pie, just backup your imscp_roundcube database before reconfiguring your system so your settings can be restored easily.  
 
 ## Requirements
 
 - i-MSCP 1.3.x Serie (version >= 1.3.1), 1.4.x, 1.5.x Serie
 - Dovecot (Only needed if you want use the managesieve Roundcube plugin)
 - GNUPGP & open_basedir skills (Only if you need to use the enigma Roundcube plugin)
+- NextCloud is required on same domain to use nextcloud plugin.
 - Roundcube >= 1.4
 
 ### Debian / Ubuntu packages
@@ -92,23 +95,23 @@ triggering a plugin list update from the plugin management interface.
 
 ## Roundcube Webmail plugin list
 
-### account_details
+### account_details plugin  
 
 This plugin displays information about current user, mail stats and server info
 
-### additional_imap
+### additional_imap plugin  
 
 Add multiple IMAP accounts to Roundcube. GMail and Yahoo pre-configured
 
-### additional_smtp
+### additional_smtp plugin  
 
 Send Messages through another account using SMTP
 
-### advanced_search
+### advanced_search plugin  
 
 Advanced search for Roundcube
 
-### authres_status
+### authres_status plugin  
 
 Displays Authentication Status of email for DKIM
 
@@ -123,7 +126,7 @@ folder. The button will appears after archive folder configuration.
 
 ### calendar plugin
 
-This plugin provides calendar feature for Roundcube Webmail with caldav drivers added.
+This plugin provides calendar feature for Roundcube Webmail with caldav drivers added. A working caldav/carddav server required.  
 
 ### contextmenu plugin
 
@@ -134,38 +137,29 @@ read/unread, delete, reply or forward them.
 
 This plugin adds contextual menu for folders in Roundcube.
 
-### easy_unsubscribe
+### easy_unsubscribe plugin  
 
 Just like it sound, easily unsubscribe from newsletters.
 
-### fail2ban
+### fail2ban plugin  
 
-Ban IP Addresses trying to guess their way into your system. Failed attempts are logged by IP and stored in database and iptables. IPs are released after a certain amount of time.
+Ban IP Addresses trying to guess their way into your system. Failed attempts are logged by IP and stored in database and iptables. IPs are released after a certain amount of time. Fail2ban needs to be installed.  
 
-### folder_info
+### folder_info plugin  
 
-Adds a label to notify deletion of Junk and Trash Folders
+Adds a label to notify deletion of Junk and Trash Folders. This is good if you setup your system to delete old emails from Junk and Trash folders.  
 
 ### emoticons plugin
 
 This plugin parses and display smileys and other emoticons found in body of mails.
 
-### libcalendaring
+### libcalendaring plugin  
 
 Required for calendar
 
-### libkolab
+### libkolab plugin  
 
 Required for calendar
-
-### logon_page plugin
-
-This plugin allows to display additional information (HTML code block) at logon page.
-
-#### Configuration
-
-Put your content into the file config-templates/logon_page/logon_page.html It will be parsed by Roundcube Webmail
-templates engine, so you can use all template features (tags).
 
 ### managesieve plugin
 
@@ -180,9 +174,9 @@ A default Spam sieve rule will be created after the user opened the Filters conf
 This plugin allows notifying user for new mails, by focusing browser window and changing favicon, playing a sound and
 displaying a desktop notification.
 
-### nextcloud
+### nextcloud plugin  
 
-Adds tab to view NextCloud within Roundcube GUI.
+Adds tab to view NextCloud within Roundcube GUI. NextCloud must be installed and running on same domain.  
 
 ### odfviewer plugin
 
@@ -196,7 +190,7 @@ This plugin allows to update email account password from the Roundcube Webmail.
 
 This plugin adds support for inline PDF file viewer.
 
-### quota
+### quota plugin  
 
 Displays in a chart used and free space.
 
@@ -205,11 +199,11 @@ Displays in a chart used and free space.
 This plugin logs the failed login attempts and requires users to go through a reCAPTCHA verification process when the
 maximum number of login attempts has been reached. In other words, this plugin help mitigate dictionary attacks.
 
-### select_pagesize
+### select_pagesize plugin  
 
-Plugin to choose how many emails to display per page. Additional line required to be placed in Roundcube's config.inc.php file is automatically added `$config['pagesize_options'] = [10, 15, 20, 25, 30, 40, 50];`  
+Plugin to choose how many emails to display per page. Additional line required to be placed in Roundcube's config.inc.php file is automatically added `$config['pagesize_options'] = [10, 15, 20, 25, 30, 40, 50];` during install.  
 
-### show_folder_size
+### show_folder_size plugin  
 
 Adds information to show folder sizes
 
@@ -217,11 +211,11 @@ Adds information to show folder sizes
 
 This plugin add support for task management.
 
-### tls_icon
+### tls_icon plugin  
 
 Icon beside senders email address showing if sent with encryption
 
-### vcard_attach
+### vcard_attach plugin  
 
 Sends a vCard as an attachement automatically to all outbound emails based on identity information or contact information.
 
@@ -235,7 +229,7 @@ This plugin adds an option to download all attachments of a message in one zip f
 
 **Enabled/Disabled by Default**  
 
-I have all the plugins that has prerequisites required before you can install and use  
+I have disabled all the plugins that requires server admin skills to install and use  
 
 ~~~  
     'acl_plugin' => 'yes',
