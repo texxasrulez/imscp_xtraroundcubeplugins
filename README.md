@@ -35,7 +35,7 @@ Install Roundcube to i-MSCP system
 
 `./installto.sh /var/www/imscp/gui/public/tools/webmail/`  
 
-Edit this file to allow install of my XtraRoundcubePlugins Plugin  
+Edit this file to allow install of my XtraRoundcubePlugins Plugin and change Rouncube version to match your install  
 
 `nano /etc/imscp/roundcube/roundcube.data'  
 
