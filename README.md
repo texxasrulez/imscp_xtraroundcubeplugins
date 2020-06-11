@@ -40,10 +40,10 @@ Should install with no issues and execute the following commands for security
 
 `rm -r /var/www/imscp/gui/public/tools/webmail/public_html` // This is not necessary but I do it  
 
-Now you can upload and install the downloaded https://github.com/texxasrulez/imscp_xtraroundcubeplugins/archive/1.4.6.tar.gz from the Plugin Manager Page in i-MSCP. Also, if you use the Spamassassin Plugin provided by the official i-MSCP team, you will need to download my version updated for Roundcube 1.4+ to work at https://github.com/texxasrulez/imscp_spamassassin
+Now you can upload and install my plugin XtraRoundcubePlugins here https://github.com/texxasrulez/imscp_xtraroundcubeplugins/ from the Plugin Manager Page in i-MSCP. Also, if you use the Spamassassin Plugin provided by the official i-MSCP team, you will need to download my version updated for Roundcube 1.4+ to work at https://github.com/texxasrulez/imscp_spamassassin
 
 This repo will automatically add plugins to main config as well as inject proper schemas into database.  
-You will only need to upload the `/tarball_installer/XtraRoundcubePlugins.tar.gz` file to i-MSCP's Plugin Manager Page.  
+You will only need to upload the `/tarball_installer/XtraRoundcubePlugins.tar.gz` file to i-MSCP's Plugin Manager Page, or the spamassassin plugin referrencedd above if using.  
 
 **Be Advised**  
 If you reconfigure i-MSCP, it will revert back to original Roundcube v 1.2+ and you will need to do this all over again. Good thing it is easy as pie, just backup your imscp_roundcube database before reconfiguring your system so your settings can be restored easily.  
