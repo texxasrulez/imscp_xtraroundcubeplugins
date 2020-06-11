@@ -40,10 +40,10 @@ Should install with no issues and execute the following commands for security
 
 `rm -r /var/www/imscp/gui/public/tools/webmail/public_html` // This is not necessary but I do it  
 
-Now you can upload and install my plugin XtraRoundcubePlugins here https://github.com/texxasrulez/imscp_xtraroundcubeplugins/ from the Plugin Manager Page in i-MSCP. Also, if you use the Spamassassin Plugin provided by the official i-MSCP team, you will need to download my version updated for Roundcube 1.4+ to work at https://github.com/texxasrulez/imscp_spamassassin
+Now you can upload and install my plugin XtraRoundcubePlugins here https://github.com/texxasrulez/imscp_xtraroundcubeplugins/ from the Plugin Manager Page in i-MSCP. Also, if you use the Spamassassin Plugin provided by the official i-MSCP team, you will need to download my version updated for Roundcube 1.4+ to work at https://github.com/texxasrulez/imscp_spamassassin for the updated version of Roundcube. Both are OSS as of this posting, so I have updated and kept original credits and requirements according to the GNU License.  
 
-This repo will automatically add plugins to main config as well as inject proper schemas into database.  
-You will only need to upload the `/tarball_installer/XtraRoundcubePlugins.tar.gz` file to i-MSCP's Plugin Manager Page, or the spamassassin plugin referrencedd above if using.  
+This repo will automatically add plugins to main config, with any other dependencies as well as inject proper schemas into database.  
+You will only need to upload the `/tarball_installer/XtraRoundcubePlugins.tar.gz` file to i-MSCP's Plugin Manager Page, or the spamassassin plugin referenced above if using. Use the file located within "tarball_installer" as well to upload and install within i-MSCP Plugin Manager Page.  
 
 **Be Advised**  
 If you reconfigure i-MSCP, it will revert back to original Roundcube v 1.2+ and you will need to do this all over again. Good thing it is easy as pie, just backup your imscp_roundcube database before reconfiguring your system so your settings can be restored easily.  
