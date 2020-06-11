@@ -3,8 +3,8 @@
 **Forked by texxasrulez**  
 
 I have been playing with i-MSCP long enough now that I know just enough to be dangerous and have forked the RoundcubePlugin the developers give away and updated for use with Roundcube version 1.4.x. I have added several popular plugins and enabled many stock plugins for a more enhanced Roundcube experience. I have tried to make as many customizable configurations as possible and will add more in the future as I knit pick this.  
-This repo does have several of my own plugins added as well as many that I personally like.  
-Many users wanted a caldav capable calendar plugin, now there is one. You will need to have a caldav server already setup and know your URL structure to add that to your main config.php file to sync with your calendar server.  
+This repo does have several of my own plugins added as well as many that I personally like. If you would like more to be added, just let me know and I will do my best to accommodate your request.  
+Many users wanted a caldav capable calendar plugin, now there is one. You will need to have a caldav server already setup and know your URL structure to add that to your main config.php file to sync with your calendar server. I use this caldav_calendar extension exclusively with NextCloud and have no issues with i-MSCP because I have the "30_apache2_tools_proxy.pl" listener installed on my system which will take care of cross script domain issues. No problems on my end using this setup. I will add I have not quite figured out how to make the enigma plugin work using the system Roundcube, my instance I have uploded and installed to my actual domain works adding required open_basedir options using the "10_php_confoptions_override.pl" listener file provided by i-MSCP developers and added required directories but seems to not work with the panel site. I will figure it out and let everyone know.  
 I will have more detailed instructions soon. Here is what I have so far ...
 
 ***Roundcube 1.4.x and higher REQUIRED to work***
@@ -19,15 +19,16 @@ Move to your working directory
 
 Download mine or official (link above)  
 
-`wget https://github.com/texxasrulez/roundcube_xtra/archive/1.4.6.1.tar.gz'  
+`https://github.com/texxasrulez/roundcube_xtra/archive/1.4.6.2.tar.gz'  
+Extract file and then upload the tar.gz file located in the "tarball_installer" directory to your working directory of your server.   
 
 Extract Files  
 
-`tar -xzf 1.4.6.1.tar.gz`  
+`tar -xzf roundcubemail-1.4.6-complete_xtra.tar.gz`  
 
 Install Roundcube to i-MSCP system
 
-`cd /usr/local/src/roundcube_xtra-1.4.6.1/bin'  
+`cd /usr/local/src/roundcube_xtra-1.4.6.2/bin'  
 
 `./installto.sh /var/www/imscp/gui/public/tools/webmail/`  
 
@@ -37,10 +38,11 @@ Should install with no issues and execute the following commands for security
 
 `rm -r /var/www/imscp/gui/public/tools/webmail/public_html`  
 
-To make it even easier on you, download https://github.com/texxasrulez/imscp_xtraroundcubeplugins/archive/1.4.6.tar.gz  
+Now you can upload and install the downloaded https://github.com/texxasrulez/imscp_xtraroundcubeplugins/archive/1.4.6.tar.gz from the Plugin Manager Page in i-MSCP. Also, if you use the Spamassassin Plugin provided by the official i-MSCP team, you will need to download my version updated for Roundcube 1.4+ to work at https://github.com/texxasrulez/imscp_spamassassin
 
 This repo will automatically add plugins to main config as well as inject proper schemas into database.  
 You will only need to upload the `/tarball_installer/XtraRoundcubePlugins.tar.gz` file to i-MSCP's Plugin Manager Page.  
+
 **Be Advised**  
 If you reconfigure i-MSCP, it will revert back to original Roundcube v 1.2 and you will need to do this all over again. Good thing it is easy as pie, just backup your imscp_roundcube database before reconfiguring your system so your settings can be restored easily.  
 
