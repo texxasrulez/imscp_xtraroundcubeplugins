@@ -18,7 +18,7 @@ $config['enigma_pgp_homedir'] = '{enigma_pgp_homedir}';
 
 // Location of gpg binary. By default it will be auto-detected.
 // This is also a way to force gpg2 use if there are both 1.x and 2.x on the system.
-$config['enigma_pgp_binary'] = '';
+$config['enigma_pgp_binary'] = '{enigma_pgp_binary}';
 
 // Location of gpg-agent binary. By default it will be auto-detected.
 // It's used with GnuPG 2.x.

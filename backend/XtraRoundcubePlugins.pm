@@ -535,7 +535,8 @@ sub _configurePlugin
         };
     } elsif ( $pluginName eq 'enigma' ) {
         $data = {
-            enigma_pgp_homedir => $self->{'config'}->{'enigma_config'}->{'enigma_pgp_homedir'}
+            enigma_pgp_homedir => $self->{'config'}->{'enigma_config'}->{'enigma_pgp_homedir'},
+            enigma_pgp_binary => $self->{'config'}->{'enigma_config'}->{'enigma_pgp_binary'}
         };
     } elsif ( $pluginName eq 'help' ) {
         $data = {
