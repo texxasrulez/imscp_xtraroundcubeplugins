@@ -21,16 +21,16 @@ Move to your working directory (I use this one)
 
 Download mine or official Roundcube (link above)  
 
-`https://github.com/texxasrulez/roundcube_xtra/archive/1.4.6.2.tar.gz'  
+`https://github.com/texxasrulez/roundcube_xtra'  
 Extract file and then upload the tar.gz file located in the "tarball_installer" directory to your working directory of your server.   
 
 Extract Files  
 
-`tar -xzf roundcubemail-1.4.6-complete_xtra.tar.gz`  
+`tar -xzf roundcubemail-VERSION-complete_xtra.tar.gz`  
 
 Install Roundcube to i-MSCP system
 
-`cd /usr/local/src/roundcube_xtra-1.4.6.2/bin'  
+`cd /usr/local/src/roundcube_xtra-VERSION/bin'  
 
 `./installto.sh /var/www/imscp/gui/public/tools/webmail/`  
 
