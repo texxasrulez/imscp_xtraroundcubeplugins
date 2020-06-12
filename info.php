@@ -33,5 +33,5 @@ return array(
     'date'        => '2020-06-06',
     'name'        => 'XtraRoundcubePlugins',
     'desc'        => 'Provides extra plugins in addition to the official RoundcubePlugins for Roundcube Webmail >= v 1.4',
-    'url'         => 'http://github.com/texxasrulez/imscp_xtraroundcubeplugins'
+    'url'         => 'https://github.com/texxasrulez/imscp_xtraroundcubeplugins'
 );
