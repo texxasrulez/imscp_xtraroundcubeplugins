@@ -27,10 +27,10 @@ return array(
         'Sascha Bay'
     ),
     'email'       => 'gene@genesworld.net',
-    'version'     => '1.0.0',
-    'build'       => '2020060601',
+    'version'     => '1.0.3',
+    'build'       => '2020062002',
     'require_api' => '1.0.6',
-    'date'        => '2020-06-06',
+    'date'        => '2020-06-20',
     'name'        => 'XtraRoundcubePlugins',
     'desc'        => 'Provides extra plugins in addition to the official RoundcubePlugins for Roundcube Webmail >= v 1.4',
     'url'         => 'https://github.com/texxasrulez/imscp_xtraroundcubeplugins'

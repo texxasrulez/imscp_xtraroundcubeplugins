@@ -3469,7 +3469,7 @@ function rcube_calendar_ui(settings)
       var brightness, select, id = cal.id;
 
       me.calendars[id] = $.extend({
-        url: rcmail.url('calendar/load_events', { source: id }),
+        url: rcmail.url('calendar/load_events', { source: id, driver: cal.driver }),
         id: id
       }, cal);
 

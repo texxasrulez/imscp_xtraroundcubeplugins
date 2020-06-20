@@ -5,34 +5,27 @@
 select.deco {
 	height:18px;
 	font-size:12px;
-	font-weight: bold;
 	border-radius:3px;
 	-moz-border-radius:3px;
 	-webkit-border-radius:3px;
 	color:#fff;
-	background:#323a23;
-	border:1px solid #dbebb0;	
+	background:#444;
+	border:1px solid #ababab;	
 	}
 	
-	.remotehint {
-	height:15px;
-	z-index:1;
+	.remotehint{z-index:1;
 	position:absolute;
 	top:1px;
 	margin-left:auto;
 	left:50%;
 	margin-left:-200px;
-	width:auto;
+	width:400px;
 	border-radius:5px;
-	padding-top: 2px;
-	padding-right: 15px;
-	padding-bottom: 1px;
-	padding-left: 15px;
+	padding:4px;
 	-moz-border-radius:5px;
-	border:1px solid #c9b9e9;
-	background:#364616;
+	border:1px solid #DEEEFC;
+	background:#F2F9FF;
 	text-align:center;
-	color:#c9b9e9;
-	font-weight: bold;
+	color:#3F70BA;
 	display:inline;
 	}

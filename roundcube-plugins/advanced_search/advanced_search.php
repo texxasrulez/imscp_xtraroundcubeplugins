@@ -48,7 +48,7 @@ class advanced_search extends rcube_plugin
     public function init()
     {
         $this->rc = rcmail::get_instance();
-        $this->load_config("config-default.inc.php");
+        $this->load_config("config.inc.php");
         $this->load_config();
         $this->config = $this->rc->config->get('advanced_search_plugin');
         $this->register_action('plugin.display_advanced_search', array($this, 'display_advanced_search'));
@@ -73,8 +73,6 @@ class advanced_search extends rcube_plugin
 
             if (file_exists($this->home . '/' . $file)) {
                 $this->include_stylesheet($file);
-            } else {
-                $this->include_stylesheet('skins/default/advanced_search.css');
             }
 
             if (empty($this->rc->action)) {
@@ -87,14 +85,11 @@ class advanced_search extends rcube_plugin
             $file = 'skins/' . $this->skin . '/advanced_search.css';
             if (file_exists($this->home . '/' . $file)) {
                 $this->include_stylesheet($file);
-            } else {
-                $this->include_stylesheet('skins/default/advanced_search.css');
             }
         }
 
         $this->add_hook('startup', array($this, 'startup'));
     }
-
 
     public function startup($args)
     {
@@ -115,6 +110,7 @@ class advanced_search extends rcube_plugin
                 $search = 'advanced_search_active';
             }
         }
+
         if (!empty($draft_uid)) {
             $parts = explode('__MB__', $draft_uid);
             if (count($parts) == 2) {
@@ -213,9 +209,9 @@ class advanced_search extends rcube_plugin
                             'command'    => 'plugin.advanced_search',
                             'label'      => 'advsearch',
                             'type'       => 'link',
-                            'classact'   => 'icon advanced-search active',
-                            'class'      => 'icon advanced-search',
-                            'innerclass' => 'icon advanced-search'
+                            'classact'   => 'icon advanced_search active',
+                            'class'      => 'icon advanced_search',
+                            'innerclass' => 'icon advanced_search'
                         )
                     )
                 ),
@@ -225,13 +221,14 @@ class advanced_search extends rcube_plugin
             $this->api->add_content(
                 $this->api->output->button(
                     array(
-                        'command'    => 'plugin.advanced_search',
-                        'title'      => 'advsearch',
-                        'label'      => 'search',
-                        'type'       => 'link',
-                        'classact'   => 'button advanced-search active',
-                        'class'      => 'button advanced-search',
-                        'innerclass' => 'button advanced-search',
+                            'command'    => 'plugin.advanced_search',
+                            'label'      => 'search',
+                            'type'       => 'link',
+                            'class'      => 'button advanced_search',
+                            'classact'   => 'button advanced_search',
+							'classsel'   => 'button advanced_search pressed',
+							'title'      => 'advsearch',
+                            'innerclass' => 'inner',
                     )
                 ),
                 $target_menu
@@ -422,12 +419,12 @@ class advanced_search extends rcube_plugin
      */
     public function display_advanced_search()
     {
-        $ret = array('html' => $this->generate_searchbox(),
-                     'row' => $this->add_row(),
+        $ret = array('html'           => $this->generate_searchbox(),
+                     'row'            => $this->add_row(),
                      'saved_searches' => $this->get_saved_search_names(),
-                     'title' => $this->i18n_strings['advsearch'],
-                     'date_criteria' => $this->config['date_criteria'],
-                     'flag_criteria' => $this->config['flag_criteria'],
+                     'title'          => $this->i18n_strings['advsearch'],
+                     'date_criteria'  => $this->config['date_criteria'],
+                     'flag_criteria'  => $this->config['flag_criteria'],
                      'email_criteria' => $this->config['email_criteria']);
 
         $this->rc->output->command('plugin.show', $ret);
@@ -439,7 +436,6 @@ class advanced_search extends rcube_plugin
         $reset_button = new html_inputfield(array('type' => 'reset', 'name' => 'reset', 'class' => 'button reset', 'value' => $this->i18n_strings['resetsearch']));
         $save_button = html::tag('input', array('type' => 'submit', 'name' => 'save_the_search', 'id'=> 'save_the_search', 'class' => 'button save_search', 'value' => $this->i18n_strings['save_the_search']));
         $delete_button = new html_inputfield(array('type' => 'submit', 'name' => 'delete', 'style' => 'display: none;', 'class' => 'button delete_search', 'value' => $this->i18n_strings['deletesearch']));
-
         $layout_table = new html_table();
         $layout_table->add(null, $search_button->show());
         $folderConfig = array('name' => 'folder');
@@ -573,7 +569,7 @@ class advanced_search extends rcube_plugin
         return $select;
     }
 
-    public function trigger_search_pagination($param)
+    public function trigger_search_pagination()
     {
         $_GET['search'] = $_SESSION['av_search'];
         $_GET['folder'] = $_SESSION['av_folder'];
@@ -746,13 +742,13 @@ class advanced_search extends rcube_plugin
                     if (!$cont) {
                         $cont = rcube_label('nosubject');
                     }
-                    $cont = rcube::Q($cont);
+                    $cont = rcube_utils::rep_specialchars_output($cont);
                 } elseif ($col == 'size') {
                     $cont = rcmail::get_instance()->show_bytes($header->$col);
                 } elseif ($col == 'date') {
                     $cont = rcmail::get_instance()->format_date($header->date);
                 } else {
-                    $cont = rcube::Q($header->$col);
+                    $cont = rcube_utils::rep_specialchars_output($header->$col);
                 }
                 $a_msg_cols[$col] = $cont;
             }
@@ -778,7 +774,7 @@ class advanced_search extends rcube_plugin
             if ($header->priority) {
                 $a_msg_flags['prio'] = (int) $header->priority;
             }
-            $a_msg_flags['ctype'] = rcube::Q($header->ctype);
+            $a_msg_flags['ctype'] = rcube_utils::rep_specialchars_output($header->ctype);
             $a_msg_flags['mbox'] = $mbox;
             if (!empty($header->list_flags) && is_array($header->list_flags)) {
                 $a_msg_flags = array_merge($a_msg_flags, $header->list_flags);
@@ -807,7 +803,6 @@ class advanced_search extends rcube_plugin
 
         return $uid_mboxes;
     }
-
 
     private function do_pagination($folders, $onPage)
     {
@@ -856,7 +851,7 @@ class advanced_search extends rcube_plugin
         if ($args['section'] != 'advancedsearch') {
             return;
         }
-        $rcmail = rcmail::get_instance();
+        $RCMAIL = rcmail::get_instance();
 
         $displayOptions = array();
         $displayOptions['_show_message_label_header'] = rcube_utils::get_input_value('_show_message_label_header', rcube_utils::INPUT_POST) == 1 ? true : false;
@@ -877,7 +872,7 @@ class advanced_search extends rcube_plugin
     {
         $args['list']['advancedsearch'] = array(
             'id' => 'advancedsearch',
-            'section' => rcube::Q($this->gettext('advancedsearch'))
+            'section' => rcube_utils::rep_specialchars_output($this->gettext('advancedsearch'))
         );
 
         return($args);
@@ -893,7 +888,9 @@ class advanced_search extends rcube_plugin
         if ($args['section'] == 'advancedsearch') {
 
             $this->rc = rcmail::get_instance();
-            $args['blocks']['label_display_options'] = array('options' => array(), 'name' => rcube::Q($this->gettext('label_display_options')));
+            $args['blocks']['label_display_options'] = array(
+			'options' => array(),
+			'name'    => rcube_utils::rep_specialchars_output($this->gettext('label_display_options')));
 
             $displayOptions = $this->rc->config->get('advanced_search_display_options', array());
             $target_menu = (isset($displayOptions['target_menu']) && !empty($displayOptions['target_menu'])) ? $displayOptions['target_menu'] : $this->config['target_menu'];
@@ -903,18 +900,19 @@ class advanced_search extends rcube_plugin
                 $optarg['selected'] = 'selected';
                 $target_image = 'menu_location_a.jpg';
             }
-            $options .= html::tag('option', $optarg, rcube::Q($this->gettext('display_in_messagemenu')));
+			
+            $options .= html::tag('option', $optarg, rcube_utils::rep_specialchars_output($this->gettext('display_in_messagemenu')));
             $optarg = array('value' => 'toolbar');
             if ($target_menu == 'toolbar') {
                 $optarg['selected'] = 'selected';
                 $target_image = 'menu_location_b.jpg';
             }
-            $options .= html::tag('option', $optarg, rcube::Q($this->gettext('display_in_toolbar')));
+			
+            $options .= html::tag('option', $optarg, rcube_utils::rep_specialchars_output($this->gettext('display_in_toolbar')));
             $select = html::tag('select', array('name' => 'button_display_option', 'id' => 'button_display_option'), $options);
-
-            $label1 = html::label('_show_message_label_header', rcube::Q($this->gettext('mailbox_headers_in_results')));
-            $label2 = html::label('_show_message_mbox_info', rcube::Q($this->gettext('mailbox_info_in_results')));
-            $label3 = html::label('button_display_option', rcube::Q($this->gettext('show_advanced_search')));
+            $label1 = html::label('_show_message_label_header', rcube_utils::rep_specialchars_output($this->gettext('mailbox_headers_in_results')));
+            $label2 = html::label('_show_message_mbox_info', rcube_utils::rep_specialchars_output($this->gettext('mailbox_info_in_results')));
+            $label3 = html::label('button_display_option', rcube_utils::rep_specialchars_output($this->gettext('show_advanced_search')));
 
             $arg1 = array('name' => '_show_message_label_header', 'id' => '_show_message_label_header', 'type' => 'checkbox', 'title' => "", 'class' => 'watermark linput', 'value' => 1);
             if (isset($displayOptions['_show_message_label_header']) && $displayOptions['_show_message_label_header'] === true) {
@@ -923,6 +921,7 @@ class advanced_search extends rcube_plugin
             } else {
                 $img1class = 'disabled';            
             }
+			
             $check1 = html::tag('input', $arg1);
             $arg2 = array('name' => '_show_message_mbox_info', 'id' => '_show_message_mbox_info', 'type' => 'checkbox', 'title' => "", 'class' => 'watermark linput', 'value' => 1);
             if (isset($displayOptions['_show_message_mbox_info']) && $displayOptions['_show_message_mbox_info'] === true) {
@@ -932,9 +931,9 @@ class advanced_search extends rcube_plugin
                 $img2class = 'disabled';
             }
 
-            $img1 = html::img(array('src' => $this->url('skins/larry/images/show_mbox_row.jpg'), 'class' => $img1class));
-            $img2 = html::img(array('src' => $this->url('skins/larry/images/show_mbox_col.jpg'), 'class' => $img2class));
-            $img3 = html::img(array('src' => $this->url('skins/larry/images/' . $target_image)));
+            $img1 = html::img(array('src' => $this->url('skins/' . $this->skin . '/images/show_mbox_row.jpg'), 'class' => $img1class));
+            $img2 = html::img(array('src' => $this->url('skins/' . $this->skin . '/images/show_mbox_col.jpg'), 'class' => $img2class));
+            $img3 = html::img(array('src' => $this->url('skins/' . $this->skin . '/images/' . $target_image)));
 
             $check2 = html::tag('input', $arg2);
             $args['blocks']['label_display_options']['options'][0] = array('title' => '', 'content' => '<p class="avsearchpref"><span>' . $check1 . ' ' . $label1 . '</span> ' . $img1 . '</p>');
@@ -968,6 +967,7 @@ class advanced_search extends rcube_plugin
                 unset($folder_count[$k]);
             }
         }
+		
         $fetch = $this->do_pagination($folder_count, $page);
         $mails = array();
         $currentMailbox = "";
@@ -1019,6 +1019,7 @@ class advanced_search extends rcube_plugin
                 $showAvmbox = true;
             }
         }
+		
         $uid_mboxes = $this->rcmail_js_message_list($messages, false, null, $showAvmbox, $avbox, $showMboxColumn);
 
         return $uid_mboxes;

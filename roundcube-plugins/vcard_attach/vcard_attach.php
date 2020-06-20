@@ -49,7 +49,7 @@
                     $script = '$(".button").each(function(){if($(this).attr("onclick") == "history.back()"){$(this).attr("onclick", "self.close()");}});var temp=document.location.search.split("&_create=");$($(".contactfieldcontent").children().get(0)).prop("readonly", true);if(temp[1]){$($(".contactfieldcontent").children().get(0)).val(temp[1]);}$($(".deletebutton").get(0)).remove();';
                     $rcmail->output->add_script($script, 'docready');
                 }
-            } else if ($args['template'] == 'addressbook' && rcube_utils::get_input_value('_source', RCUBE_INPUT_GPC) == 'collected') {
+            } else if ($args['template'] == 'addressbook' && rcube_utils::get_input_value('_source', 'RCUBE_INPUT_GPC') == 'collected') {
                 $script = 'if(self.location==parent.location){try{opener.parent.document.getElementById("preferences-frame").src="./?_action=edit-prefs&_task=settings&_section=compose&_framed=1";}catch(e){};self.close()};';
                 $script = html::tag('script', array('type' => 'text/javascript'), $script);
                 $args['content'] = str_replace('<body', $script, $args['content'].
@@ -67,7 +67,7 @@
                 $field_id = 'rcmfd_attach_vcard';
                 $checkbox = new html_checkbox(array('name' => '_attach_vcard', 'id' => $field_id, 'value' => 1, 'onclick' => '$(".mainaction").hide(); document.forms.form.submit()'));
                 $content = $checkbox->show($attach_vcard ? 1 : 0);
-                $args['blocks']['main']['options']['attach_vcard'] = array('title' => html::label($field_id, rcube::Q($this->gettext('attachvcard'))), 'content' => $content, );
+                $args['blocks']['main']['options']['attach_vcard'] = array('title' => html::label($field_id, rcube_utils::rep_specialchars_output($this->gettext('attachvcard'))), 'content' => $content, );
                 if ($attach_vcard) {
                     $field_id = 'rcmfd_attach_vcard_from';
                     $select = new html_select(array('name' => '_attach_vcard_from', 'id' => $field_id));
@@ -118,7 +118,7 @@
                         $ul = html::tag('ul', array('style' => 'list-style: decimal; margin-top: -10px; margin-left: -25px; margin-bottom: 0;'), $li);
                         $append = html::tag('fieldset', array('id' => 'vcard_attach_contacts', 'style' => 'font-size: 11px; padding: 15px; margin-top: -7px; border: 1px solid #ABABAB; display: inline'), html::tag('legend', array('style' => 'font-size: 12px; padding-bottom: 0;'), $this->gettext('editcontact')).$ul);
                     }
-                    $args['blocks']['main']['options']['attach_vcard_from'] = array('title' => '<!-- --><br />&raquo;&nbsp;'.html::label($field_id, rcube::Q($this->gettext('vcard_attach.from'))), 'content' => html::tag('table', array('cellpadding' => '0', 'cellspacing' => '0'), html::tag('tr', null, html::tag('td', array('style' => 'width: 1px;'), $content).html::tag('td', null, $append))), );
+                    $args['blocks']['main']['options']['attach_vcard_from'] = array('title' => '<!-- --><br />&raquo;&nbsp;'.html::label($field_id, rcube_utils::rep_specialchars_output($this->gettext('vcard_attach.from'))), 'content' => html::tag('table', array('cellpadding' => '0', 'cellspacing' => '0'), html::tag('tr', null, html::tag('td', array('style' => 'width: 1px;'), $content).html::tag('td', null, $append))), );
                 }
             }
             return $args;

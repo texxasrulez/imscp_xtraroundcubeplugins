@@ -11,10 +11,10 @@ select.deco {
 	-webkit-border-radius:3px;
 	color:#fff;
 	background:#000;
-	border:1px solid #666;	
+	border:1px solid #ababab;	
 	}
 	
-	.remotehint {
+	.remotehint{
 	height:15px;
 	z-index:1;
 	position:absolute;
@@ -29,10 +29,11 @@ select.deco {
 	padding-bottom: 1px;
 	padding-left: 15px;
 	-moz-border-radius:5px;
-	border:1px solid #fff;
+	border:1px solid #fff900;
 	background:#000;
 	text-align:center;
 	color:#fff;
 	font-weight: bold;
 	display:inline;
 	}
+	
